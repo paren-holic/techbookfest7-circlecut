@@ -17,7 +17,7 @@
    :size (+ (q/random 100) 25)
    :alpha (q/random 255)
    :angle (q/random (* 2 q/PI))
-   :n (+ 1 (q/floor (q/random 3)))})
+   :n (+ 1 (q/floor (/ (* (q/random 3) (q/random 3)) 2)))})
 
 (defn draw-paren [p n]
   (q/fill 0 0 0 (:alpha p))
@@ -58,10 +58,10 @@
   (q/background 255)
   (doseq [p (:parens state)]
     (draw-paren p (:n state)))
-  (draw-logo)
-  ;; NOTE: remove if not want to record
-  (when (< (:n state) 1)
-    (q/save-frame "paren-particles-#####.png")))
+  (draw-logo))
+  ;; NOTE: uncomment if want to record
+  ;; (when (< (:n state) 1)
+  ;;   (q/save-frame "paren-particles-#####.png"))
 
 (q/defsketch techbookfest7-circlecut
   :title "paren-particles"
