@@ -2,6 +2,8 @@
 
 It's our circle cut for TechBookFest7 written in Clojure.
 
+![paren-particles](paren-particles.gif)
+
 ## Usage
 
 LightTable - open `core.clj` and press `Ctrl+Shift+Enter` to evaluate the file.
