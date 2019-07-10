@@ -16,18 +16,10 @@
    :y (q/random +height+)
    :size (+ (q/random 100) 25)
    :alpha (q/random 255)
-   :angle (q/random q/PI)
-   :da (- (q/random 0.2) 0.1)})
+   :angle (q/random (* 2 q/PI))
+   :n (+ 1 (q/floor (q/random 3)))})
 
-(defn update-paren [p]
-  {:x (:x p)
-   :y (:y p)
-   :size (:size p)
-   :alpha (:alpha p)
-   :angle (+ (:angle p) (:da p))
-   :da (:da p)})
-
-(defn draw-paren [p]
+(defn draw-paren [p n]
   (q/fill 0 0 0 (:alpha p))
   (q/text-font (q/create-font "Noto Serif CJK JP Regular" 30))
   (q/text-align :left)
@@ -35,7 +27,8 @@
   (q/push-matrix)
   (q/translate (+ (:x p) (* (:size p) 0.2))
                (+ (:y p) (* (:size p) 0.2)))
-  (q/rotate (:angle p))
+  (let [a (:angle p)]
+    (q/rotate (q/lerp a (+ a (* (:n p) 2 q/PI)) n)))
   (q/text "(" 0 0)
   (q/pop-matrix))
 
@@ -55,16 +48,20 @@
 (defn setup []
   (q/frame-rate 30)
   (q/color-mode :hsb)
-  (for [n (range 0 100)] (setup-paren)))
+  {:n 0 :parens (for [n (range 0 100)] (setup-paren))})
 
 (defn update-state [state]
-  (map update-paren state))
+  {:n (+ (:n state) 0.005)
+   :parens (:parens state)})
 
 (defn draw-state [state]
   (q/background 255)
-  (doseq [p state]
-    (draw-paren p))
-  (draw-logo))
+  (doseq [p (:parens state)]
+    (draw-paren p (:n state)))
+  (draw-logo)
+  ;; NOTE: remove if not want to record
+  (when (< (:n state) 1)
+    (q/save-frame "paren-particles-#####.png")))
 
 (q/defsketch techbookfest7-circlecut
   :title "paren-particles"
