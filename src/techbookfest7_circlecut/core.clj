@@ -1,4 +1,5 @@
 (ns techbookfest7-circlecut.core
+  (:gen-class)
   (:require [quil.core :as q]
             [quil.middleware :as m]))
 
@@ -71,3 +72,5 @@
   :draw draw-state
   :features [:keep-on-top]
   :middleware [m/fun-mode])
+
+(defn -main [& args])
