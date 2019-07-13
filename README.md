@@ -4,13 +4,35 @@ It's our circle cut for TechBookFest7 written in Clojure.
 
 ![paren-particles](paren-particles.gif)
 
+## Prerequisites
+
+- Java 8
+- [Leiningen](https://leiningen.org/)
+
 ## Usage
 
-LightTable - open `core.clj` and press `Ctrl+Shift+Enter` to evaluate the file.
+- command line
 
-Emacs - run cider, open `core.clj` and press `C-c C-k` to evaluate the file.
+```sh
+$ lein run
+```
 
-REPL - run `(require 'techbookfest7-circle-cut.core)`.
+or
+
+```sh
+$ lein uberjar
+$ java -jar target/techbookfest7-circlecut.jar
+```
+
+- Emacs
+
+Run cider, open `src/techbookfest7_circlecut/core.clj` and press `C-c C-k` to evaluate the file.
+
+- REPL
+
+```clj
+user=> (require 'techbookfest7-circlecut.core)
+```
 
 ## Author
 
